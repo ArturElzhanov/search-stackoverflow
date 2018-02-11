@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Searching App</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" lang="ru-RU,ru;q=0.9,en-US" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <link href="js/jquery.tablesorter.min.js/tablesorter/themes/blue/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-success" role="alert">
+                <h3 class="alert-heading">Please, search StackOverFlow by title!</h3>
+                <form class="form-inline">
+                    <label class="sr-only" for="inputName">Searching</label>
+                    <input type="search" class="form-control mb-2 mr-sm-2" id="inputName" name="searchInTitleText" placeholder="Your title"/>
+                    <button type="submit" class="btn btn-primary mb-2">Search</button>
+                </form>
+            </div>
+
+            <h4>StackOverFlow Posts</h4>
+
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col" th:text="#{postnames.author}"></th>
+                    <th scope="col" th:text="#{postnames.title}"></th>
+                    <th scope="col" th:text="#{postnames.date}"></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="post : ${posts}">
+                        <td th:text="${post.owner.displayName}"></td>
+                        <td><a th:href="${post.link}" th:text="${post.title}"></a>
+                            <span class="badge badge-success"  th:if ="${post.answerCount} > 1" th:text="' ' +${post.answerCount} + ' answers'"></span>
+                            <span class="badge badge-success" th:if ="${post.answerCount} == 1" th:text="' ' + ${post.answerCount} + ' answer'"></span>
+                        </td>
+                        <td th:text="${post.creationDate}"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-danger" role="alert" th:if="${checkErrorMessage} != null">
+                <h4 class="text-center" th:text="${checkErrorMessage}"></h4>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
