@@ -11,6 +11,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
@@ -61,5 +65,19 @@ public class ApplicationConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/templates/css/");
         registry.addResourceHandler("/docs/**").addResourceLocations("/WEB-INF/templates/docs/");
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/templates/js/");
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+
+    @Bean
+    public Docket docket() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("ru.home"))
+                .paths(PathSelectors.ant("/api/*"))
+                .build();
     }
 }
