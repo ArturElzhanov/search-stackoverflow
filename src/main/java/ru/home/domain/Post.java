@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * StackOverflow post model
+ */
 public class Post implements Serializable {
     private List<String> tags;
     private PostOwner owner;

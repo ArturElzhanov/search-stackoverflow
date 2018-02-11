@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.cfg.MapperConfig;
 import com.fasterxml.jackson.databind.introspect.AnnotatedField;
 import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
 
+/**
+ * Strategy for mapping model fields names to JSON response fields names
+ */
 public class PostNameStrategy extends PropertyNamingStrategy {
 
     @Override

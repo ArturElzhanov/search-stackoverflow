@@ -3,6 +3,9 @@ package ru.home.domain;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Model for StackOverflowPosts response
+ */
 public class StackOverflowPosts implements Serializable {
 
     private List<Post> items;

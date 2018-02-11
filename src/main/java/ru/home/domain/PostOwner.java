@@ -2,6 +2,9 @@ package ru.home.domain;
 
 import java.io.Serializable;
 
+/**
+ * StackOverflow post owner model
+ */
 public class PostOwner implements Serializable {
     private long reputation;
     private long userId;

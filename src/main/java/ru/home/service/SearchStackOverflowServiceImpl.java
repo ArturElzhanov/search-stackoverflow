@@ -12,7 +12,6 @@ import java.io.IOException;
 
 @Service
 public class SearchStackOverflowServiceImpl implements SearchStackOverflowService {
-
     private static final String STACKEXCHANGEPREFIX =
             "http://api.stackexchange.com/2.2/search?order=desc&sort=creation&intitle=";
 
