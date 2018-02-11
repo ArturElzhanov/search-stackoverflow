@@ -14,4 +14,12 @@ public interface SearchStackOverflowService {
      * @return StackOverflowPosts
      */
     StackOverflowPosts getPosts(String searchInTitleText);
+
+    /**
+     * Check text by user on not null ang english symbols
+     *
+     * @param searchInTitleText text in title
+     * @return check result
+     */
+    boolean checkRequestData(String searchInTitleText);
 }

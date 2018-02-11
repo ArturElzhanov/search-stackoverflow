@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 import ru.home.domain.StackOverflowPosts;
 import ru.home.strategy.PostNameStrategy;
@@ -36,4 +37,9 @@ public class SearchStackOverflowServiceImpl implements SearchStackOverflowServic
         return stackOverflowPosts;
     }
 
+    @Override
+    public boolean checkRequestData(String searchInTitleText) {
+        return !StringUtils.isEmpty(searchInTitleText) &&
+                searchInTitleText.matches("^[a-zA-Z0-9]+$");
+    }
 }
