@@ -9,6 +9,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    <!-- jQuery: required (tablesorter works with jQuery 1.2.3+) -->
+    <script src="docs/js/jquery-1.2.6.min.js"></script>
+
+    <!-- Pick a theme, load the plugin & initialize plugin -->
+    <link href="css/theme.default.css" rel="stylesheet"/>
+    <script src="js/jquery.tablesorter.min.js"></script>
+    <script src="js/jquery.tablesorter.widgets.min.js"></script>
+    <script>
+        $(function(){
+            $("#resultTable").trigger("update")
+                .trigger("appendCache").tablesorter({
+                widgets        : ['zebra', 'columns'],
+                usNumberFormat : false,
+                sortReset      : true,
+                sortRestart    : true
+            });
+        });
+    </script>
+
 </head>
 <body>
 <div class="container">
@@ -25,7 +44,7 @@
 
             <h4>StackOverFlow Posts</h4>
 
-            <table class="table">
+            <table id="resultTable" class="table">
                 <thead class="thead-light">
                 <tr>
                     <th scope="col" th:text="#{postnames.author}"></th>
