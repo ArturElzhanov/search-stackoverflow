@@ -91,6 +91,9 @@
                 </tr>
             </tbody>
         </table>
+        <div class="alert alert-danger" role="alert" th:if="${checkErrorMessage} != null">
+            <h4 class="text-center" th:text="${checkErrorMessage}"></h4>
+        </div>
         <br></br>
     </div>
 </div>
@@ -101,8 +104,8 @@
             <div class="col s12 m4">
                 <div class="icon-block">
                     <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
-                    <h5 class="center">Speeds up searching</h5>
-                    <p class="light">The searching posts by title and sorted by activity, votes, selection or relevance on your choice.</p>
+                    <h5 class="center">Quick search</h5>
+                    <p class="light">Search for messages by name and sort by activity, votes, selection or relevance of your choice.</p>
                 </div>
             </div>
 
@@ -110,7 +113,7 @@
                 <div class="icon-block">
                     <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
                     <h5 class="center">User Experience Focused</h5>
-                    <p class="light">Simple search for users, excluding searching for non-significant parameters.</p>
+                    <p class="light">Simple search for users, excluding search of nonessential parameters.</p>
                 </div>
             </div>
 
@@ -118,7 +121,7 @@
                 <div class="icon-block">
                     <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
                     <h5 class="center">Easy to work with</h5>
-                    <p class="light">All you need to do is to drive in the search words and select the type of sorting results.</p>
+                    <p class="light">All you need to do is start the search words and select the type of sorting.</p>
                 </div>
             </div>
         </div>

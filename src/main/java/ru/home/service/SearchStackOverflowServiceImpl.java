@@ -30,6 +30,7 @@ public class SearchStackOverflowServiceImpl implements SearchStackOverflowServic
             stackOverflowPosts = objectMapper.readValue(post,StackOverflowPosts.class);
         } catch (IOException e) {
             e.printStackTrace();
+            throw new IllegalArgumentException();
         }
 
         return stackOverflowPosts;
