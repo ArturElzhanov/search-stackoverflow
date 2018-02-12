@@ -2,14 +2,19 @@
 <html  xmlns:th="http://www.thymeleaf.org/">
 <head>
     <title>Searching App</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" lang="ru-RU,ru;q=0.9,en-US" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <!-- jQuery: required (tablesorter works with jQuery 1.2.3+) -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <script src="docs/js/jquery-1.2.6.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <!-- Pick a theme, load the plugin & initialize plugin -->
     <link href="css/theme.default.css" rel="stylesheet"/>
@@ -25,56 +30,102 @@
             });
         });
     </script>
-
 </head>
+
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="alert alert-success" role="alert">
-                <h3 class="alert-heading">Please, search StackOverFlow posts sorting by:
-                    <select class="alert-heading" id="sort" name="sortBy" form="search">
-                        <option value="activity">activity</option>
-                        <option value="votes">votes</option>
-                        <option value="creation">creation</option>
-                        <option value="relevance">relevance</option>
-                    </select>
-                </h3>
-                <form id="search" class="form-inline">
-                    <label class="sr-only" for="inputName">Searching</label>
-                    <input type="search" class="form-control mb-2 mr-sm-2" id="inputName" name="searchInTitleText" placeholder="Your title"/>
-                    <button type="submit" class="btn btn-primary mb-2">Search</button>
-                </form>
-            </div>
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#">Navbar Link</a></li>
+        </ul>
 
-            <h4>StackOverFlow Posts</h4>
+        <ul id="nav-mobile" class="side-nav">
+            <li><a href="#">Navbar Link</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
 
-            <table id="resultTable" class="table">
-                <thead class="thead-light">
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <br></br>
+        <h4 class="header center orange-text">Please, search StackOverFlow posts!</h4>
+        <br></br>
+        <div class="row">
+            <form class="col s12">
+                <select class="browser-default" name="sortBy">
+                    <option value="" disabled = "disabled" selected = "selected">Choose sorting</option>
+                    <option value="activity">activity</option>
+                    <option value="votes">votes</option>
+                    <option value="creation">creation</option>
+                    <option value="relevance">relevance</option>
+                </select>
+                <div class="input-field col s12">
+                    <input type="search" class="form-control mb-2 mr-sm-2" id="inputName" name="searchInTitleText"/>
+                    <label for="inputName">Your title</label>
+                </div>
+                <div class="center">
+                    <button type="submit" class="btn waves-effect waves-light orange">Search</button>
+                </div>
+            </form>
+        </div>
+
+        <h5 th:unless="${#lists.isEmpty(posts)}">StackOverFlow Posts:</h5>
+        <table id="resultTable" class="table" th:unless="${#lists.isEmpty(posts)}">
+            <thead class="thead-light">
                 <tr>
                     <th scope="col" th:text="#{postnames.author}"></th>
                     <th scope="col" th:text="#{postnames.title}"></th>
                     <th scope="col" th:text="#{postnames.date}"></th>
                 </tr>
-                </thead>
+            </thead>
 
-                <tbody>
-                    <tr th:each="post : ${posts}">
-                        <td th:text="${post.owner.displayName}"></td>
-                        <td><a th:href="${post.link}" th:text="${post.title}"></a>
-                            <span class="badge badge-success"  th:if ="${post.answerCount} > 1" th:text="' ' +${post.answerCount} + ' answers'"></span>
-                            <span class="badge badge-success" th:if ="${post.answerCount} == 1" th:text="' ' + ${post.answerCount} + ' answer'"></span>
-                        </td>
-                        <td th:text="${post.creationDate}"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <tbody class="tbody">
+                <tr th:each="post : ${posts}">
+                    <td th:text="${post.owner.displayName}"></td>
+                    <td><a th:href="${post.link}" th:text="${post.title}"></a>
+                        <span class="badge badge-success"  th:if ="${post.answerCount} > 1" th:text="' ' +${post.answerCount} + ' answers'"></span>
+                        <span class="badge badge-success" th:if ="${post.answerCount} == 1" th:text="' ' + ${post.answerCount} + ' answer'"></span>
+                    </td>
+                    <td th:text="${post.creationDate}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br></br>
+    </div>
+</div>
 
-            <div class="alert alert-danger" role="alert" th:if="${checkErrorMessage} != null">
-                <h4 class="text-center" th:text="${checkErrorMessage}"></h4>
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
+                    <h5 class="center">Speeds up searching</h5>
+                    <p class="light">The searching posts by title and sorted by activity, votes, selection or relevance on your choice.</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+                    <h5 class="center">User Experience Focused</h5>
+                    <p class="light">Simple search for users, excluding searching for non-significant parameters.</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
+                    <h5 class="center">Easy to work with</h5>
+                    <p class="light">All you need to do is to drive in the search words and select the type of sorting results.</p>
+                </div>
             </div>
         </div>
     </div>
+    <br></br>
 </div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>
