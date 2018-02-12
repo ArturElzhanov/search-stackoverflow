@@ -13,8 +13,11 @@ public class Post implements Serializable {
     private boolean isAnswered;
     private int viewCount;
     private Date closedDate;
+    private int bountyAmount;
+    private Date bountyClosesDate;
     private long acceptedAnswerId;
     private int answerCount;
+    private Date communityOwnedDate;
     private int score;
     private Date lastActivityDate;
     private Date creationDate;
@@ -23,6 +26,8 @@ public class Post implements Serializable {
     private String link;
     private String closedReason;
     private String title;
+    private Date protectedDate;
+    private Date lockedDate;
 
 
     public Post() {
@@ -33,8 +38,11 @@ public class Post implements Serializable {
                 boolean isAnswered,
                 int viewCount,
                 long closedDate,
+                int bountyAmount,
+                long bountyClosesDate,
                 long acceptedAnswerId,
                 int answerCount,
+                long communityOwnedDate,
                 int score,
                 long lastActivityDate,
                 long creationDate,
@@ -42,14 +50,19 @@ public class Post implements Serializable {
                 long questionId,
                 String link,
                 String closedReason,
-                String title) {
+                String title,
+                long protectedDate,
+                long lockedDate) {
         this.tags = tags;
         this.owner = owner;
         this.isAnswered = isAnswered;
         this.viewCount = viewCount;
         this.closedDate = parseDate(closedDate);
+        this.bountyAmount = bountyAmount;
+        this.bountyClosesDate = parseDate(bountyClosesDate);
         this.acceptedAnswerId = acceptedAnswerId;
         this.answerCount = answerCount;
+        this.communityOwnedDate = parseDate(communityOwnedDate);
         this.score = score;
         this.lastActivityDate = parseDate(lastActivityDate);
         this.creationDate = parseDate(creationDate);
@@ -58,6 +71,8 @@ public class Post implements Serializable {
         this.link = link;
         this.closedReason = closedReason;
         this.title = title;
+        this.protectedDate = parseDate(protectedDate);
+        this.lockedDate = parseDate(lockedDate);
     }
 
 
@@ -105,6 +120,22 @@ public class Post implements Serializable {
         this.closedDate = parseDate(closedDate);
     }
 
+    public int getBountyAmount() {
+        return bountyAmount;
+    }
+
+    public void setBountyAmount(int bountyAmount) {
+        this.bountyAmount = bountyAmount;
+    }
+
+    public Date getBountyClosesDate() {
+        return bountyClosesDate;
+    }
+
+    public void setBountyClosesDate(long bountyClosesDate) {
+        this.bountyClosesDate = parseDate(bountyClosesDate);
+    }
+
     public long getAcceptedAnswerId() {
         return acceptedAnswerId;
     }
@@ -119,6 +150,14 @@ public class Post implements Serializable {
 
     public void setAnswerCount(int answerCount) {
         this.answerCount = answerCount;
+    }
+
+    public Date getCommunityOwnedDate() {
+        return communityOwnedDate;
+    }
+
+    public void setCommunityOwnedDate(long communityOwnedDate) {
+        this.communityOwnedDate = parseDate(communityOwnedDate);
     }
 
     public int getScore() {
@@ -183,5 +222,21 @@ public class Post implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Date getProtectedDate() {
+        return protectedDate;
+    }
+
+    public void setProtectedDate(long protectedDate) {
+        this.protectedDate = parseDate(protectedDate);
+    }
+
+    public Date getLockedDate() {
+        return lockedDate;
+    }
+
+    public void setLockedDate(Date lockedDate) {
+        this.lockedDate = lockedDate;
     }
 }

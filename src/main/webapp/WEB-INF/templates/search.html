@@ -4,7 +4,6 @@
     <title>Searching App</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" lang="ru-RU,ru;q=0.9,en-US" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
-    <link href="js/jquery.tablesorter.min.js/tablesorter/themes/blue/style.css" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -18,8 +17,7 @@
     <script src="js/jquery.tablesorter.widgets.min.js"></script>
     <script>
         $(function(){
-            $("#resultTable").trigger("update")
-                .trigger("appendCache").tablesorter({
+            $("#resultTable").tablesorter({
                 widgets        : ['zebra', 'columns'],
                 usNumberFormat : false,
                 sortReset      : true,
@@ -34,8 +32,15 @@
     <div class="row">
         <div class="col">
             <div class="alert alert-success" role="alert">
-                <h3 class="alert-heading">Please, search StackOverFlow by title!</h3>
-                <form class="form-inline">
+                <h3 class="alert-heading">Please, search StackOverFlow posts sorting by:
+                    <select class="alert-heading" id="sort" name="sortBy" form="search">
+                        <option value="activity">activity</option>
+                        <option value="votes">votes</option>
+                        <option value="creation">creation</option>
+                        <option value="relevance">relevance</option>
+                    </select>
+                </h3>
+                <form id="search" class="form-inline">
                     <label class="sr-only" for="inputName">Searching</label>
                     <input type="search" class="form-control mb-2 mr-sm-2" id="inputName" name="searchInTitleText" placeholder="Your title"/>
                     <button type="submit" class="btn btn-primary mb-2">Search</button>
